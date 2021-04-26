@@ -1,5 +1,6 @@
 import os
 from datetime import datetime, timedelta
+import socket
 from threading import Timer
 
 import discord
@@ -40,7 +41,7 @@ def check_status():
 
     try:
         status = server.status()
-    except socket.timeout:
+    except Exception:
         return None
 
     raw = status.raw
