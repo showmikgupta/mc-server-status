@@ -19,6 +19,7 @@ server_running = False
 
 EMBED_SERVER_OFF = 0xff0000
 EMBED_SERVER_ON = 0x008000
+EMBED_PLAYERS = 0x00FFFF
 
 
 @bot.event
@@ -28,12 +29,11 @@ async def on_ready():
     timer = Timer(5, display_status)
 
 
-# @bot.command(name='set', help='Sets the server ip and port')
-# async def set_ip_and_port(ctx, ip, port='25565'):
-#     server_ip = ip
-#     server_port = port
-#     test = server_ip + ':' + server_port
-#     await ctx.send(f"Updated server infomation\nBot will check if server is running on {test}")
+@bot.command(name='players', help='Shows how many players are online')
+async def get_players(ctx):
+    status = check_status()
+    embed = discord.Embed(title='Players Online', description=f"{status['players_online']} are online", color=EMBED_PLAYERS)
+    await ctx.send(embed=embed)
 
 
 def check_status():
