@@ -36,6 +36,18 @@ async def get_players(ctx):
     await ctx.send(embed=embed)
 
 
+@bot.command(name='status', help='Shows the current status of the server')
+async def show_status(ctx):
+    status = check_status()
+
+    if status:
+        embed = discord.Embed(title='Server Status', description="The server is up", color=EMBED_SERVER_ON)
+    else:
+        embed = discord.Embed(title='Server Status', description="The server is down", color=EMBED_SERVER_OFF)
+        
+    await ctx.send(embed=embed)
+
+
 def check_status():
     server = MinecraftServer.lookup("71.244.141.99:25565")
 
