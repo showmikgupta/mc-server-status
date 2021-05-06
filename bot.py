@@ -32,7 +32,9 @@ async def on_ready():
 @bot.command(name='players', help='Shows how many players are online')
 async def get_players(ctx):
     status = check_status()
-    embed = discord.Embed(title='Players Online', description=f"{status['players_online']} are online", color=EMBED_PLAYERS)
+    print(type(status['players_online']))
+    quant = 'player' if status['players_online'] == 1 else 'players'
+    embed = discord.Embed(title='Players Online', description=f"{status['players_online']} {quant} online", color=EMBED_PLAYERS)
     await ctx.send(embed=embed)
 
 
@@ -44,7 +46,7 @@ async def show_status(ctx):
         embed = discord.Embed(title='Server Status', description="The server is up", color=EMBED_SERVER_ON)
     else:
         embed = discord.Embed(title='Server Status', description="The server is down", color=EMBED_SERVER_OFF)
-        
+
     await ctx.send(embed=embed)
 
 
